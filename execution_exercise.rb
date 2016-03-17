@@ -39,60 +39,14 @@ def largest_contiguous_subsum(arr) #n^2 + n => n^2
   largest_sum
 end
 
-# def largest_contiguous_subsum2(arr)
-#   largest_sum = arr.first
-#   partial_sum = nil
-#   arr.each_with_index do |el,i|
-#     #would it be less
-#     if partial_sum.nil?
-#       partial_sum = el
-#     else
-#       partial_sum += el
-#     end
-#     if largest_sum < partial_sum
-#       largest_sum = partial_sum
-#     end
-#     partial_sum = nil if el < 0
-#   end
-#   largest_sum
-#
-# end
-
 def LCS(arr)
-  largest_sum = arr.first
-  partial_sums = []
-  idx = 0
+  largest_sum = arr.inject(:+)
+  sum = largest_sum
 
-  arr.each do |el|
-    idx += 1 if el < 0
-    if partial_sums[idx] == nil
-      partial_sums[idx] = el
-    else
-      partial_sums[idx] += el
-    end
-    idx += 1 if el < 0
-  end
-  byebug
-  new_sums = []
-  idx2 = 0
-  negative_count = 0
-  partial_sums.each do |el|
-
-    negative_count += 1 if el < 0
-    idx2 += 1 if negative_count == 2
-    if new_sums[idx2] == nil
-      new_sums[idx2] = el
-    else
-      new_sums[idx2] += el
-    end
+  while arr.length > 1
+    sum -= (arr[0] > arr[-1] ? arr.pop : arr.shift)
+    largest_sum = sum if largest_sum < sum
   end
 
-  final = new_sums + partial_sums
-  final.max
-  # accumulator = partial_sums.shift
-  # partial_sums.each do |partial|
-  #   accumulator = partial + accumulator
-  #   largest_sum = accumulator if accumulator > largest_sum
-  # end
-
+  largest_sum
 end
