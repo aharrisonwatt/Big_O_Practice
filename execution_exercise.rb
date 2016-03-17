@@ -18,7 +18,7 @@ def my_min2(arr) #O(n)
   smallest
 end
 
-def largest_contiguous_subsum(arr) #n^2 + n => n^2
+def largest_contiguous_subsum(arr) #n^2 + n^3 => n^3
   subarrays = []
   arr.each_index do |i|
     j = i
@@ -39,12 +39,19 @@ def largest_contiguous_subsum(arr) #n^2 + n => n^2
   largest_sum
 end
 
-def LCS(arr)
+def lcs(arr)
   largest_sum = arr.inject(:+)
   sum = largest_sum
-
-  while arr.length > 1
-    sum -= (arr[0] > arr[-1] ? arr.pop : arr.shift)
+  left_index = 0
+  right_index = (arr.length - 1)
+  until right_index == left_index
+    if arr[left_index] > arr[right_index]
+      sum -= arr[right_index]
+      right_index -= 1
+    else
+      sum -= arr[left_index]
+      left_index += 1
+    end
     largest_sum = sum if largest_sum < sum
   end
 
