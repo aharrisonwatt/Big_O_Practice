@@ -1,6 +1,6 @@
 require 'byebug'
 
-#time: permutation => O(n^2), map => O(n)
+#time: permutation => O(n!), map => O(n)
 #space: perm => O(n!)
 def first_anagram?(str1, str2)
   letters = str1.split("")
@@ -44,7 +44,7 @@ def third_anagram?(str1,str2)
 end
 
 #time => O(n)
-#space => O(n)
+#space => O(1)
 def fourth_anagram?(str1,str2)
   letters = Hash.new(0)
 
