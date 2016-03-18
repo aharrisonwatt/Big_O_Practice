@@ -1,6 +1,6 @@
 require 'byebug'
 
-#time: permutation => O(n!), map => O(n)
+#time: permutation => O(n * n!)
 #space: perm => O(n!)
 def first_anagram?(str1, str2)
   letters = str1.split("")
@@ -8,7 +8,6 @@ def first_anagram?(str1, str2)
   return true if perms.include?(str2)
   false
 end
-
 
 #time => O(n^2)
 #space => O(2n)
